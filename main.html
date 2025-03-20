@@ -1,392 +1,616 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Animal Farm Appreciation</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<head>
+    <title>Animal Farm Appreciation</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <!-- Bootstrap CSS v5.3.2 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
+    <!-- Bootstrap CSS v5.3.2 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous"
+    />
 
-        <style>
-            body {
-                background-color: #222;
-                color: white;
-                text-align: center;
-                overflow-x: hidden;
-                margin: 0;
-                padding: 0;
-            }
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+        }
 
-            /* Slideshow Styles */
-            .slideshow-container {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100vh; /* Only takes up the top half of the screen */
-                background-image: url('https://media.wired.com/photos/5fd940d7a2d1c6c2bdea0c00/191:100/w_1280,c_limit/games_animal-farm.jpg');
-                background-size: cover; /* Prevents stretching/compressing */
-                background-position: center;
-                background-repeat: no-repeat;
-                z-index: -1;
-            }
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh; /* Adjusted for better visibility */
+            background-image: url('https://media.wired.com/photos/5fd940d7a2d1c6c2bdea0c00/191:100/w_1280,c_limit/games_animal-farm.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+        }
 
-            .title-container {
-                background-color: rgba(0, 0, 0, 0.8);
-                padding: 50px;
-                border-radius: 10px;
-                display: inline-block;
+        .title-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100px);
+            animation: riseUp 1.5s ease-out forwards;
+            z-index: 1;
+            position: relative;
+        }
+
+        @keyframes riseUp {
+            from {
                 opacity: 0;
                 transform: translateY(100px);
-                animation: riseUp 1.5s ease-out forwards;
-                z-index: 1; /* Ensures title stays on top of slideshow */
-                position: relative;
             }
-
-            @keyframes riseUp {
-                from {
-                    opacity: 0;
-                    transform: translateY(100px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-
-            .stage {
-                height: 100vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                opacity: 0;
-                transform: translateY(50px);
-                transition: opacity 1s ease, transform 1s ease;
-            }
-
-            .stage.visible {
+            to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
 
-            .btn-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 20px;
-            }
+        .stage {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 1s ease, transform 1s ease;
+            padding: 20px; /* Added padding for smaller screens */
+        }
 
-            .btn-dark {
-                background-color: rgba(0, 0, 0, 0.8);
-                border: none;
-                color: white;
-                padding: 15px 30px;
-                font-size: 1.2rem;
-                transition: 0.3s;
-            }
+        .stage.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-            .btn-dark:hover {
-                background-color: #444;
-                transform: scale(1.1);
-            }
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
 
-            .btn-start {
-                font-size: 1.8rem;
-                padding: 20px 40px;
-                font-weight: bold;
-            }
+        .btn-dark {
+            background-color: rgba(0, 0, 0, 0.8);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            transition: 0.3s;
+        }
 
-            .btn-row {
-                display: flex;
-                gap: 20px;
-                justify-content: center;
-            }
+        .btn-dark:hover {
+            background-color: #444;
+            transform: scale(1.1);
+        }
 
-            /* Navbar */
-            .navbar {
-                background-color: #111;
-            }
+        .btn-start {
+            font-size: 1.8rem;
+            padding: 20px 40px;
+            font-weight: bold;
+        }
 
-            .navbar-nav .nav-link {
-                color: white !important;
-                font-size: 1.2rem;
-            }
+        /* Navbar */
+        .navbar {
+            background-color: #111;
+        }
 
-            .navbar-nav .nav-link:hover {
-                color: #bbb !important;
-            }
+        .navbar-nav .nav-link {
+            color: white !important;
+            font-size: 1.2rem;
+        }
 
-            /* About Section */
-            #about {
-                background-color: #333;
-                padding: 80px 5%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
+        .navbar-nav .nav-link:hover {
+            color: #bbb !important;
+        }
 
-            #historical-context {
-                background-color: #333;
-                padding: 80px 5%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-wrap: wrap;
-            }
+        /* About Section */
+        #about, #historical-context {
+            background-color: #333;
+            padding: 40px 5%;
+            display: flex;
+            flex-direction: column; /* Changed to column for better stacking */
+            align-items: center;
+            justify-content: center;
+        }
 
+        .about-container {
+            display: flex;
+            align-items: center;
+            max-width: 90%;
+            width: 100%;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        .about-text {
+            flex: 1;
+            padding: 10px; /* Adjusted padding */
+            text-align: left;
+        }
+
+        .about-image {
+            flex: 1;
+            display: flex;
+            justify-content: center; /* Centered images */
+            padding: 10px; /* Adjusted padding */
+        }
+
+        .about-image img {
+            width: 100%;
+            max-width: 300px; /* Adjusted max-width for smaller screens */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+        .stacked-image img {
+            width: 100%;
+            max-width: 300px; /* Adjusted max-width for smaller screens */
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 992px) {
             .about-container {
-                display: flex;
-                align-items: center;
-                max-width: 90%;
-                width: 100%;
-            }
-
-            .about-text {
-                flex: 1;
-                padding-right: 50px;
-                text-align: left;
-            }
-
-            .about-image {
-                flex: 1;
-                display: flex;
-                justify-content: flex-end;
-            }
-
-            .about-image img {
-                width: 100%;
-                max-width: 600px;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            }
-
-            .stacked-image img {
-                width: 100%;
-                max-width: 300px;
-                height: auto;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            }
-
-            .about-image figure {
+                flex-direction: column;
                 text-align: center;
             }
 
-            .about-image figcaption {
-                color: #bbb;
-                font-size: 0.9rem;
-                margin-top: 10px;
+            .about-text {
+                padding-right: 0;
+                margin-bottom: 20px;
             }
 
-            @media (max-width: 992px) {
-                .about-container {
-                    flex-direction: column;
-                    text-align: center;
-                }
-
-                .about-text {
-                    padding-right: 0;
-                    margin-bottom: 20px;
-                }
-
-                .about-image {
-                    justify-content: center;
-                }
+            .about-image {
+                justify-content: center;
             }
-        </style>
-    </head>
+        }
 
-    <body>
-        <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Animal Farm Appreciation</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#historical-context">Historical Context</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#summary">Summary</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#analysis">Analysis</a>
-                        </li>
-                    </ul>
+        .characters-section {
+            padding: 40px 5%;
+            background-color: #333;
+        }
+
+        .character {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+            transition: transform 0.3s;
+        }
+
+        .character:hover {
+            transform: scale(1.05);
+        }
+
+        @media (min-width: 576px) {
+            .character {
+                margin: 20px;
+            }
+        }
+
+        #summary {
+            height: 75vh; /* Increased height for better visibility */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #444; /* Optional: Change background color for distinction */
+        }
+
+        #analysis {
+            height: 75vh; /* Increased height for better visibility */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #444; /* Optional: Change background color for distinction */
+        }
+        #analysis2 {
+            height: 100vh; /* Increased height for better visibility */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333; /* Optional: Change background color for distinction */
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Animal Farm Appreciation</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#historical-context">Historical Context</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#summary">Summary</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#analysis">Analysis</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Slideshow Section -->
+        <div class="slideshow-container"></div>
+
+        <section class="d-flex justify-content-center align-items-center vh-50">
+            <div class="title-container">
+                <h1 class="display-1">The Artistry of <span style="color:red">Animal Farm</span></h1>
+            </div>
+        </section>
+
+        <section class="stage" id="about">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">About <span style="color:red">Animal Farm</span> and George Orwell</h2>
+                    <p class="lead">
+                        Finished in 1944 and published in 1945, George Orwell's <em>Animal Farm</em> is a political, satirical, and allegorical novel revolving around barnyard animals and their rebellion against their human oppressors. Through this story, George Orwell is able to explore many complex themes, such as power, manipulation, the power of education, and class. Orwell also critiques various historical events, mainly the Russian Revolution and the rise of the Soviet Union under Stalin. Today, <em>Animal Farm</em> continues to be regarded as a powerful commentary and one of the most influential and brilliant books of all time.
+                        <br><br>
+                        George Orwell (Eric Arthur Blair) was an English novelist whose work is defined by its powerful social criticism and opposition to totalitarianism. He is best known for his novels <em>Animal Farm</em> and <em>1984</em>, although he has many additional works encompassing different areas of literature. 
+                    </p>
+                </div>
+                <div class="about-image">
+                    <figure>
+                        <img src="https://hips.hearstapps.com/hmg-prod/images/george-orwell.jpg" alt="Animal Farm Cover">
+                        <figcaption>George Orwell | Source: <a href="https://www.biography.com/authors-writers/george-orwell">Biography.com</a></figcaption>
+                    </figure>
                 </div>
             </div>
-        </nav>
+        </section>
 
-        <main>
-            <!-- Slideshow Section -->
-            <div class="slideshow-container"></div>
-
-            <section class="d-flex justify-content-center align-items-center vh-100">
-                <div class="title-container">
-                    <h1 class="display-1">The Artistry of <span style="color:red">Animal Farm</span></h1>
-                </div>
-            </section>
-
-            <section class="stage" id="about">
-                <div class="about-container">
-                    <div class="about-text">
-                        <h2 class="display-4">About <span style="color:red">Animal Farm</span> and George Orwell</h2>
-                        <p class="lead">
-                            Finished in 1944 and published in 1945, George Orwell's <em>Animal Farm</em> is a political, satirical, and allegorical novel revolving around barnyard animals and their rebellion against their human oppressors. Through this story, George Orwell is able to explore many complex themes, such as power, manipulation, the power of education, and class. Orwell also critiques various historical events, mainly the Russian Revolution and the rise of the Soviet Union under Stalin. Today, <em>Animal Farm</em> continues to be regarded as a powerful commentary and one of the most influential and brilliant books of all time.
-                            <br><br>
-                            George Orwell (Eric Arthur Blair) was an English novelist whos work is defined by its powerful social criticism and opposition to totalitarianism. He is best known for his novels <em>Animal Farm</em> and <em>1984</em>, although he has many additional works encompassing different areas of literature. 
-                        </p>
-                    </div>
-                    <div class="about-image">
-                        <figure>
-                            <img src="https://hips.hearstapps.com/hmg-prod/images/george-orwell.jpg" alt="Animal Farm Cover">
-                            <figcaption>George Orwell | Source: <a href="https://www.biography.com/authors-writers/george-orwell">Biography.com</a></figcaption>
-                        </figure>
+        <section class="stage" id="options">
+            <div class="container">
+                <h2 class="display-4">Explore <span style="color:red">Animal Farm</span></h2>
+                <div class="btn-container mt-4">
+                    <button class="btn btn-dark btn-start" onclick="scrollToSection('historical-context')">Start</button>
+                    <div class="btn-row">
+                        <p class="lead">Or skip to</p>
+                        <button class="btn btn-dark" onclick="scrollToSection('summary')">Summary</button>
+                        <button class="btn btn-dark" onclick="scrollToSection('analysis')">Analysis</button>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="stage" id="options">
-                <div class="container">
-                    <h2 class="display-4">Explore <span style="color:red">Animal Farm</span></h2>
-                    <div class="btn-container mt-4">
-                        <button class="btn btn-dark btn-start" onclick="scrollToSection('historical-context')">Start</button>
-                        <div class="btn-row">
-                            <p class="lead">Or skip to</p>
-                            <button class="btn btn-dark">Summary</button>
-                            <button class="btn btn-dark">Analysis</button>
+        <section class="stage" id="historical-context">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context</h2>
+                    <p class="lead">
+                        Prior to the Russian Revolution, Russia was a very impoverished country compared to other countries in Europe. To the rest of Europe, Russia was an underdeveloped, barbaric society. When the Industrial Revolution began in Russia, many people moved to major Russian cities to find work. However, these cities were overcrowded and provided very poor living conditions to the incoming population. Food shortages were common across Russia, and a series of wars further weakened the country. Large protests by Russian workers against the monarchy and Tsar Nicholas II were held, beginning the Russian Revolution.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <figure>
+                        <img src="https://westernciv.com/wp-content/uploads/2021/05/Nicholas_II_.jpg" alt="Tsar Nicholas II">
+                        <figcaption>Tsar Nicholas II | Source: <a href="https://westernciv.com/syllabus/history-of-russia/spring/tsar-nicholas-ii-2/">Westernciv.com</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="options">
+            <div class="about-container">
+                <div class="about-image">
+                    <figure>
+                        <img src="https://cropper.watch.aetnd.com/public-content-aetn.video.aetnd.com/video-thumbnails/AETN-History_VMS/21/204/tdih-march08_HD.jpg" alt="February Revolution">
+                        <figcaption>The February Revolution (March 8, 1917) | Source: <a href="https://www.history.com/this-day-in-history/february-revolution-begins">History.com</a></figcaption>
+                    </figure>
+                </div>
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context (Continued)</h2>
+                    <p class="lead">
+                        Hundreds of protestors were killed, and laborers responded with strikes, further crippling the country. Now called “soviets”, soldiers and workers banded together to fight oppression. After the first Russian Revolution ended, the country entered into World War I. Already facing a weak economy, Russia was further damaged by the war with high casualties and food shortages. There was a great deal of corruption in the Russian government, and most Russians lost faith in their Tsar, calling for an overthrow. In the February Revolution, demonstrators flooded the streets and clashed with police, fighting for food and the end of Russian involvement in the war. A few days after this demonstration, Tsar Nicholas II abdicated the throne.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="historical-context">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context (Continued)</h2>
+                    <p class="lead">
+                        A provisional government was established, and Russia continued to face food supply shortages. Later, the Bolshevik Revolution saw the Bolshevik Party, led by Vladimir Lenin, overthrow the provisional government and form a communist state. Following the communist takeover of Russia, a civil war broke out between the Bolsheviks and democratic socialists. The war ended in 1923 and Lenin’s army took complete control of the country. After Vladimir Lenin’s death in 1924, Joseph Stalin and Leon Trotsky were the two potential heirs to Lenin. Leon Trotsky was a key figure in the Russian Revolution, and Stalin was a Bolshevik operative who spread propaganda. After a power struggle between Stalin and Trotsky, Stalin came to power and emerged as the leader of the USSR.    
+                    </p>
+                </div>
+                <div class="stacked-image">
+                    <figure>
+                        <img src="https://cdn.britannica.com/54/60154-050-055103B9/Joseph-Stalin-1950.jpg" alt="Joseph Stalin">
+                        <figcaption>Joseph Stalin | Source: <a href="https://www.britannica.com/biography/Joseph-Stalin/Lenins-successor">Britannica.com</a></figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://assets.editorial.aetnd.com/uploads/2009/11/leon-trotsky.jpg?width=750&amp;height=400&amp;crop=2:1&quality=75&auto=webp" alt="Leon Trotsky">
+                        <figcaption>Leon Trotsky | Source: <a href="https://www.history.com/topics/european-history/russian-revolution">History.com</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="options">
+            <div class="about-container">
+                <div class="about-image">
+                    <figure>
+                        <img src="https://cdn.britannica.com/60/194460-050-2FDE86D3/Joseph-Stalin-Soviet-poster-communism-victory-Dictator-1952.jpg" alt="Joseph Stalin">
+                        <figcaption>Joseph Stalin Propaganda Poster | Source: <a href="https://www.britannica.com/biography/Joseph-Stalin/Role-in-World-War-II">Britannica.com</a></figcaption>
+                    </figure>
+                </div>
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context (Continued)</h2>
+                    <p class="lead">
+                        As the leader of the USSR, Stalin turned the Soviet Union into an industrial and military superpower. He implemented a series of plans to create economic growth and transform the Soviet Union. Stalin forced the consolidation of individually owned land and livestock in order to increase agricultural productivity. However, agricultural productivity dropped and food shortages affected millions. The Great Famine caused millions of deaths, but this fact was hidden by the USSR and suppressed through propaganda and censorship. Stalin was not hesitant to kill anyone who opposed his leadership using a secret police force. Soviet citizens were killed, deported, and imprisoned in forced labor camps known as Gulags. 
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="summary">
+            <div class="container">
+                <h2 class="display-4">Summary</h2>
+            </div>
+        </section>
+        
+        <section class="characters-section">
+            <h2 class="display-4 mb-4">Characters</h2>
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="character">
+                            <h3>Old Major</h3>
+                            <p>Old Major is a Middle White boar that is wise and respected. He is the inspiration for the rebellion against Mr. Jones and the humans. He also shows the animals the Beasts of England song which is sung throughout the novel.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="character">
+                            <h3>Mr. Jones</h3>
+                            <p>Mr. Jones is the owner of Manor Farm. He neglects the animals and treats them poorly, making him the opposition to all the animals. His mistreatment of the animals is what begins the rebellion.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="character">
+                            <h3>Napoleon</h3>
+                            <p>Napoleon is a boar and one of the creators of Animalism and the rebellion. He utilizes propaganda, fear, and violence to control the animals and eventually become dictator.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="character">
+                            <h3>Snowball</h3>
+                            <p>Snowball is a boar and one of the other creators of Animalism and the rebellion. He is intelligent and gets driven out by Napoleon because of his opposition to Napoleon’s ideas.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="character">
+                            <h3>Squealer</h3>
+                            <p>Squealer is another boar and creator of Animalism and the rebellion. He is persuasive and uses his ability to speak and give speeches to manipulate the animals and distort the truth.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                        <div class="character">
+                            <h3>Boxer</h3>
+                            <p>Boxer is a dedicated cart-horse who is loyal to the farm. He works harder than every other animal and hopes for the best for everybody. He dedicates himself to the farm, even when faced with abuse and struggle.</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <section class="stage" id="historical-context">
-                <div class="about-container">
-                    <div class="about-text">
-                        <h2 class="display-4">Historical Context</h2>
-                        <p class="lead">
-                            Prior to the Russian Revolution, Russia was a very impoverished country compared to other countries in Europe. To the rest of Europe, Russia was an underdeveloped, barbaric society. When the Industrial Revolution began in Russia, many people moved to major Russian cities to find work. However, these cities were overcrowded and provided very poor living conditions to the incoming population. Food shortages were common across Russia, and a series of wars further weakened the country. Large protests by Russian workers against the monarchy and Tsar Nicholas II were held, beginning the Russian Revolution.
-                        </p>
-                    </div>
-                    <div class="about-image">
-                        <figure>
-                            <img src="https://westernciv.com/wp-content/uploads/2021/05/Nicholas_II_.jpg" alt="Tsar Nicholas II">
-                            <figcaption>Tsar Nicholas II | Source: <a href = "https://westernciv.com/syllabus/history-of-russia/spring/tsar-nicholas-ii-2/">Westernciv.com</a></figcaption>
-                        </figure>
-                    </div>
+        <section class="stage" id="options">
+            <div class="about-container">
+                <div class="about-image">
+                    <figure>
+                        <img src="https://www.thecable.ng/wp-content/uploads/2022/03/Animal-Farm.png" alt="Animal Revolution">
+                        <figcaption>Farm Animals | Source: <a href="https://www.thecable.ng/our-animal-farm-as-it-was-in-the-beginning/">thecable.ng</a></figcaption>
+                    </figure>
                 </div>
-            </section>
+                <div class="about-text">
+                    <h2 class="display-4">Plot</h2>
+                    <p class="lead">
+                        Animal Farm begins with a group of farm animals who are being abused and exploited by their owner, Mr. Jones. After Old Major shows them a vision of a society where animals are free from their human oppressors, the animals are inspired to establish their own society. Three boars, Napoleon, Snowball, and Squealer, create a new system of thought named Animalism based on Old Major’s teachings. Soon, the animals rebel against Mr.Jones and are successful. The boars establish the Seven Commandments of Animalism, emphasizing peace and equality among all animals. The farm is renamed “Animal Farm” and it begins to thrive, free of the humans.
+                    </p>
+                </div>
+            </div>
+        </section>
 
-            <section class="stage" id="options">
-                <div class="about-container">
-                    <div class="about-image">
-                        <figure>
-                            <img src="https://cropper.watch.aetnd.com/public-content-aetn.video.aetnd.com/video-thumbnails/AETN-History_VMS/21/204/tdih-march08_HD.jpg" alt="February Revolution">
-                            <figcaption>The February Revolution (March 8, 1917) | Source: <a href = "https://www.history.com/this-day-in-history/february-revolution-begins">History.com</a></figcaption>
-                        </figure>
-                    </div>
-                    <div class="about-text">
-                        <h2 class="display-4">Historical Context (Continued)</h2>
-                        <p class="lead">
-                            Hundreds of protestors were killed, and laborers responded with strikes, further crippling the country. Now called “soviets”, soldiers and workers banded together to fight oppression. After the first Russian Revolution ended, the country entered into World War I. Already facing a weak economy, Russia was further damaged by the war with high casualties and food shortages. There was a great deal of corruption in the Russian government, and most Russians lost faith in their Tsar, calling for an overthrow. In the February Revolution, demonstrators flooded the streets and clashed with police, fighting for food and the end of Russian involvement in the war. A few days after this demonstration, Tsar Nicholas II abdicated the throne.
-                        </p>
-                    </div>
+        <section class="stage" id="historical-context">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">Plot (Continued)</h2>
+                    <p class="lead">
+                        Before long, Snowball and Napoleon begin to argue about various decisions regarding the farm. However, as they are the smartest animals on the farm, the boars are the only animals that make decisions on the farm. After a major argument over a windmill, Napoleon drives Snowball away with his loyal dogs. This event marks the beginning of Napoleon’s rule over the animals. Napoleon continues to gain power over the animals and take on privileges that were previously forbidden. To justify this, Napoleon uses propaganda, through Squealer’s speeches, and alters the Seven Commandments. The animals are exploited for their work while the pigs refrain from working. The farm continues to decline under Napoleon's leadership.     
+                    </p>
                 </div>
-            </section>
+                <div class="stacked-image">
+                    <figure>
+                        <img src="https://bookblog105.wordpress.com/wp-content/uploads/2016/02/animal_farm_election_2012_poster_by_jaguaro-d55puiz.jpg" alt="Snowball and Napoleon">
+                        <figcaption>Joseph Stalin | Source: <a href="https://www.google.com/url?sa=i&url=https%3A%2F%2Fbookblog105.wordpress.com%2F2016%2F02%2F05%2Fthis-week-in-reading-animal-farm-2%2F&psig=AOvVaw0vgRB5Z11_WSJGq3Scl5Gx&ust=1742571495693000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLjEvun-mIwDFQAAAAAdAAAAABAE">WordPress.com</a></figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://bam.files.bbci.co.uk/bam/live/content/zm6v46f/medium" alt="The Seven Commandments">
+                        <figcaption>The Seven Commandments | Source: <a href=https://www.bbc.co.uk/bitesize/articles/zw2r96f">bbc.co</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
 
-            <section class="stage" id="historical-context">
-                <div class="about-container">
-                    <div class="about-text">
-                        <h2 class="display-4">Historical Context (Continued)</h2>
-                        <p class="lead">
-                            A provisional government was established, and Russia continued to face food supply shortages. Later, the Bolshevik Revolution saw the Bolshevik Party, led by Vladimir Lenin, overthrow the provisional government and form a communist state. Following the communist takeover of Russia, a civil war broke out between the Bolsheviks and democratic socialists. The war ended in 1923 and Lenin’s army took complete control of the country. After Vladimir Lenin’s death in 1924, Joseph Stalin and Leon Trotsky were the two potential heirs to Lenin. Leon Trotsky was a key figure in the Russian Revolution, and Stalin was a Bolshevik operative who spread propaganda. After a power struggle between Stalin and Trotsky, Stalin came to power and emerged as the leader of the USSR.    
-                        </p>
-                    </div>
-                    <div class="stacked-image">
-                        <figure>
-                            <img src="https://cdn.britannica.com/54/60154-050-055103B9/Joseph-Stalin-1950.jpg" alt="Joseph Stalin">
-                            <figcaption>Joseph Stalin | Source: <a href = "https://www.britannica.com/biography/Joseph-Stalin/Lenins-successor">Britannica.com</a></figcaption>
-                        </figure>
-                        <figure>
-                            <img src="https://assets.editorial.aetnd.com/uploads/2009/11/leon-trotsky.jpg?width=750&amp%3Bheight=400&amp%3Bcrop=2%3A1&quality=75&auto=webp" alt="Leon Trotsky">
-                            <figcaption>Leon Trotsky | Source: <a href = "https://www.history.com/topics/european-history/russian-revolution">History.com</a></figcaption>
-                        </figure>
-                    </div>
+        <section class="stage" id="options">
+            <div class="about-container">
+                <div class="about-image">
+                    <figure>
+                        <img src="https://images.saatchiart.com/saatchi/1619039/art/7779496/6847498-HSC00001-7.jpg" alt="Windmill">
+                        <figcaption>Farm Windmill | Source: <a href="https://www.saatchiart.com/print/Painting-The-windmill-of-Animal-Farm/1619039/7779496/view">saatchiart.com</a></figcaption>
+                    </figure>
                 </div>
-            </section>
+                <div class="about-text">
+                    <h2 class="display-4">Plot (Continued)</h2>
+                    <p class="lead">
+                        Napoleon announces that the windmill, which was originally Snowball’s idea, will be made and forces all the animals to contribute to building it. When the windmill is destroyed by a storm, Napoleon blames Snowball and uses the incident to grow his power. Any animal who is suspected of disloyalty is killed, and the animals continue to work hard, believing that what they are doing is for the greater good of Animal Farm. Napoleon continues to manipulate the animals, and he changes the commandments to justify any actions that would have been forbidden. Boxer, the hardworking cart-horse, is sent to be killed by Napoleon after he is no longer deemed useful. Rations are reduced for all animals as the farm continues to decline. Napoleon enters into various trade relationships with humans in order to gain materials that the farm did not have access to before.  
+                    </p>
+                </div>
+            </div>
+        </section>
 
-            <section class="stage" id="options">
-                <div class="about-container">
-                    <div class="about-image">
-                        <figure>
-                            <img src="https://cdn.britannica.com/60/194460-050-2FDE86D3/Joseph-Stalin-Soviet-poster-communism-victory-Dictator-1952.jpg" alt="Joseph Stalin">
-                            <figcaption>Joseph Stalin Propaganda Poster | Source: <a href = "https://www.britannica.com/biography/Joseph-Stalin/Role-in-World-War-II">Britannica.com</a></figcaption>
-                        </figure>
-                    </div>
-                    <div class="about-text">
-                        <h2 class="display-4">Historical Context (Continued)</h2>
-                        <p class="lead">
-                            As the leader of the USSR, Stalin turned the Soviet Union into an industrial and military superpower. He implemented a series of plans to create economic growth and transform the Soviet Union. Stalin forced the consolidation of individually owned land and livestock in order to increase agricultural productivity. However, agricultural productivity dropped and food shortages affected millions. The Great Famine caused millions of deaths, but this fact was hidden by the USSR and suppressed through propaganda and censorship. Stalin was not hesitant to kill anyone who opposed his leadership using a secret police force. Soviet citizens were killed, deported, and imprisoned in forced labor camps known as Gulags. 
-                        </p>
-                    </div>
+        <section class="stage" id="historical-context">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">Plot (Continued)</h2>
+                    <p class="lead">
+                        Towards the end of the novel, Napoleon is in complete control of the animals and begins to embrace human traditions. The pigs walk on two legs, wear clothes, and have dinner with humans. The pigs violate all the old rules of animalism, but they are able to alter the rules and manipulate the animals into thinking they are right. The power has consumed the pigs, and they become the oppressors. What was once the Seven Commandments is now a single principle: “All animals are equal, but some animals are more equal than others,” (Orwell).    
+                    </p>
                 </div>
-            </section>
-            
-            <style>
-                .about-image {
-                    flex-direction: column;
-                    align-items: center;
+                <div class="stacked-image">
+                    <figure>
+                        <img src="https://www.theparisreview.org/blog/wp-content/uploads/2016/05/animal-farm1.jpg" alt="Pigs on Two Legs">
+                        <figcaption>Pigs on Two Legs | Source: <a href="https://www.theparisreview.org/blog/2016/05/27/more-public-spirited-pigs-and-other-news/">theparisreview.org</a></figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://wordhistories.net/wp-content/uploads/2020/04/d803f-photograph-from-the-animated-film-animal-farm-1954.png" alt="Barn Commandment">
+                        <figcaption>Final Commandment | Source: <a href="https://wordhistories.net/2019/08/12/more-equal-than-others/">wordhistories.net</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="analysis">
+            <div class="container">
+                <h2 class="display-4">Anaylsis</h2>
+            </div>
+        </section>
+
+        <section class="stage" id="analysis2">
+            <div class="container">
+                <h2 class="display-4">The Russian Revolution and Animal Farm</h2>
+                <p class = "lead">Basing his novel off the Russian Revolution, Orwell made many of his characters and events representations of real historical figures and ideologies. Using these representations, he is able to critique many real world problems in a satirical and impactful way. Some examples include:                </p>
+            </div>
+        </section>
+
+        <section class="stage" id="historical-context">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">Mr. Jones and Tsar Nicholas II</h2>
+                    <p class="lead">
+                        Mr. Jones is the oppressive owner of the farm who forces intensive labor onto the animals while withholding food and basic necessities from them. In a similar fashion, Tsar Nicholas II, was the oppressive ruler of Russia and was a poor leader, causing food shortages and poor living conditions for his citizens. Both Mr. Jones and Tsar Nicholas II had major roles in the maltreatment of their subjects, creating reason for rebellion.
+                    </p>
+                </div>
+                <div class="stacked-image">
+                    <figure>
+                        <img src="https://www.fernbyfilms.com/wp-content/uploads/2025/02/MV5BMjk3OWY0NTQtYTg5My00NGRiLTgyM2EtODBjOGRiN2I3MWY0XkEyXkFqcGc@._V1_.jpg" alt="Mr. Jones">
+                        <figcaption>Mr.Jones | Source: <a href="https://www.fernbyfilms.com/2025/02/20/movie-review-animal-farm-1954/">fernbyfilms.com</a></figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://m.media-amazon.com/images/M/MV5BNjkzNGEzMjMtMzA1NC00ZTVjLTkxZGUtYmE1NDIxZDBlZGY0XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" alt="Tsar Nicholas II">
+                        <figcaption>Tsar Nicholas II | Source: <a href="https://www.imdb.com/name/nm0874739/bio/">imdb.com</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="options">
+            <div class="about-container">
+                <div class="about-image">
+                    <figure>
+                        <img src="https://cropper.watch.aetnd.com/public-content-aetn.video.aetnd.com/video-thumbnails/AETN-History_VMS/21/204/tdih-march08_HD.jpg" alt="February Revolution">
+                        <figcaption>The February Revolution (March 8, 1917) | Source: <a href="https://www.history.com/this-day-in-history/february-revolution-begins">History.com</a></figcaption>
+                    </figure>
+                </div>
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context (Continued)</h2>
+                    <p class="lead">
+                        Hundreds of protestors were killed, and laborers responded with strikes, further crippling the country. Now called “soviets”, soldiers and workers banded together to fight oppression. After the first Russian Revolution ended, the country entered into World War I. Already facing a weak economy, Russia was further damaged by the war with high casualties and food shortages. There was a great deal of corruption in the Russian government, and most Russians lost faith in their Tsar, calling for an overthrow. In the February Revolution, demonstrators flooded the streets and clashed with police, fighting for food and the end of Russian involvement in the war. A few days after this demonstration, Tsar Nicholas II abdicated the throne.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="historical-context">
+            <div class="about-container">
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context (Continued)</h2>
+                    <p class="lead">
+                        A provisional government was established, and Russia continued to face food supply shortages. Later, the Bolshevik Revolution saw the Bolshevik Party, led by Vladimir Lenin, overthrow the provisional government and form a communist state. Following the communist takeover of Russia, a civil war broke out between the Bolsheviks and democratic socialists. The war ended in 1923 and Lenin’s army took complete control of the country. After Vladimir Lenin’s death in 1924, Joseph Stalin and Leon Trotsky were the two potential heirs to Lenin. Leon Trotsky was a key figure in the Russian Revolution, and Stalin was a Bolshevik operative who spread propaganda. After a power struggle between Stalin and Trotsky, Stalin came to power and emerged as the leader of the USSR.    
+                    </p>
+                </div>
+                <div class="stacked-image">
+                    <figure>
+                        <img src="https://cdn.britannica.com/54/60154-050-055103B9/Joseph-Stalin-1950.jpg" alt="Joseph Stalin">
+                        <figcaption>Joseph Stalin | Source: <a href="https://www.britannica.com/biography/Joseph-Stalin/Lenins-successor">Britannica.com</a></figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://assets.editorial.aetnd.com/uploads/2009/11/leon-trotsky.jpg?width=750&amp;height=400&amp;crop=2:1&quality=75&auto=webp" alt="Leon Trotsky">
+                        <figcaption>Leon Trotsky | Source: <a href="https://www.history.com/topics/european-history/russian-revolution">History.com</a></figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section class="stage" id="options">
+            <div class="about-container">
+                <div class="about-image">
+                    <figure>
+                        <img src="https://cdn.britannica.com/60/194460-050-2FDE86D3/Joseph-Stalin-Soviet-poster-communism-victory-Dictator-1952.jpg" alt="Joseph Stalin">
+                        <figcaption>Joseph Stalin Propaganda Poster | Source: <a href="https://www.britannica.com/biography/Joseph-Stalin/Role-in-World-War-II">Britannica.com</a></figcaption>
+                    </figure>
+                </div>
+                <div class="about-text">
+                    <h2 class="display-4">Historical Context (Continued)</h2>
+                    <p class="lead">
+                        As the leader of the USSR, Stalin turned the Soviet Union into an industrial and military superpower. He implemented a series of plans to create economic growth and transform the Soviet Union. Stalin forced the consolidation of individually owned land and livestock in order to increase agricultural productivity. However, agricultural productivity dropped and food shortages affected millions. The Great Famine caused millions of deaths, but this fact was hidden by the USSR and suppressed through propaganda and censorship. Stalin was not hesitant to kill anyone who opposed his leadership using a secret police force. Soviet citizens were killed, deported, and imprisoned in forced labor camps known as Gulags. 
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"
+    ></script>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"
+    ></script>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+    <script>
+        document.addEventListener("scroll", function () {
+            const sections = document.querySelectorAll(".stage");
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.75) {
+                    section.classList.add("visible");
                 }
-            
-                .about-image figure {
-                    margin-bottom: 20px;
-                }
-            </style>
-            
-
-        </main>
-
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
-
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-
-        <script>
-            function scrollToSection(id) {
-                document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-            }
-        </script>
-        <script>
-            
-            document.addEventListener("scroll", function () {
-                const sections = document.querySelectorAll(".stage");
-                sections.forEach(section => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top < window.innerHeight * 0.75) {
-                        section.classList.add("visible");
-                    }
-                });
             });
-        </script>
-    </body>
+        });
+    </script>
+</body>
 </html>
